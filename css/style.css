@@ -3,7 +3,7 @@
 
 /*
    Seção 4.2: Sistema de Identidade Visual: Paleta Terapêutica e Tipografia
-   - Primária (Confiança e Calma): #6A8EAE (azul médio calmante) ou #A2B9D1 (azul acinzentado claro)
+   - Primária (Confiança e Calma): #6A8EAE (azul médio calmante)
    - Secundária (Saúde e Crescimento): #B2C2A5 (verde sálvia suave)
    - Acento (Ação e Atenção): #E57F84 (coral suave)
    - Cor do Texto: #333333 (cinzento escuro)
@@ -15,18 +15,32 @@
 */
 
 :root {
-    --cor-primaria: #6A8EAE; /* Azul médio calmante */
-    --cor-secundaria: #B2C2A5; /* Verde sálvia suave */
-    --cor-acento: #E57F84; /* Coral suave */
+    --cor-primaria: #6A8EAE;
+    --cor-secundaria: #B2C2A5;
+    --cor-acento: #E57F84;
     --cor-texto: #333333;
     --cor-fundo: #FFFFFF;
-    --cor-fundo-alternativa: #F4F4F4;
+    --cor-fundo-alternativa: #F4F4F4; /* Usado para seções como hero e sobre-mim-breve */
+    --cor-navbar-fundo: #FFFFFF; /* Fundo da navbar, pode ser --cor-fundo ou --cor-fundo-alternativa */
+    --cor-navbar-texto: var(--cor-texto);
+    --cor-navbar-link-hover: var(--cor-acento);
+    --cor-footer-fundo: var(--cor-texto); /* Cinza escuro para o footer */
+    --cor-footer-texto: var(--cor-fundo-alternativa);
 
     --fonte-cabecalhos: 'Montserrat', sans-serif;
     --fonte-corpo: 'Roboto', sans-serif;
 
-    --base-font-size: 16px; /* Mínimo 16px para corpo */
-    --line-height-corpo: 1.6; /* Espaçamento generoso (ex: 1.5) */
+    --base-font-size: 1rem; /* Bootstrap usa 1rem como base (geralmente 16px) */
+    --line-height-corpo: 1.6;
+
+    /* Bootstrap variable overrides (optional, but good for deeper integration) */
+    --bs-primary: var(--cor-primaria);
+    --bs-secondary: var(--cor-secundaria);
+    --bs-body-color: var(--cor-texto);
+    --bs-body-bg: var(--cor-fundo);
+    --bs-link-color: var(--cor-acento);
+    --bs-link-hover-color: color-mix(in srgb, var(--cor-acento) 80%, black);
+    --bs-body-font-family: var(--fonte-corpo);
 }
 
 /* Reset básico e Estilos Globais */
@@ -34,8 +48,8 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    /* margin: 0; Bootstrap já lida com isso */
+    /* padding: 0; Bootstrap já lida com isso */
 }
 
 body {
@@ -51,143 +65,142 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--fonte-cabecalhos);
     font-weight: 700; /* Montserrat Bold */
-    line-height: 1.3;
-    margin-bottom: 0.75em;
     color: var(--cor-primaria); /* Cabeçalhos com cor primária para destaque */
 }
 
-h1 {
-    font-size: 2.5rem; /* Exemplo de tamanho */
+/* Ajustes específicos para títulos quando Bootstrap está presente */
+.display-4 { /* Usado no Hero */
+    font-family: var(--fonte-cabecalhos);
+    color: var(--cor-primaria);
 }
 
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.75rem;
-}
-
-p {
-    margin-bottom: 1em;
+.lead { /* Usado para parágrafos de destaque */
+    font-size: 1.1rem; /* Um pouco maior que o texto normal */
 }
 
 a {
     color: var(--cor-acento);
-    text-decoration: none;
+    text-decoration: none; /* Bootstrap lida com isso, mas podemos reforçar */
 }
 
 a:hover,
 a:focus {
     text-decoration: underline;
-    color: darken(var(--cor-acento), 10%);
+    color: color-mix(in srgb, var(--cor-acento) 80%, black); /* Escurece um pouco no hover */
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-ul, ol {
-    list-style-position: inside;
-    margin-bottom: 1em;
-    padding-left: 1.5em; /* Para melhor visualização dos marcadores */
-}
-
-/* Layout Básico e Componentes */
-header {
-    background-color: var(--cor-fundo-alternativa);
-    padding: 1em 2em;
+/* Navbar Customization */
+.navbar {
+    background-color: var(--cor-navbar-fundo) !important; /* Força a cor de fundo */
     border-bottom: 2px solid var(--cor-primaria);
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
 }
 
-header h1 a {
-    color: var(--cor-primaria);
-    text-decoration: none;
-}
-
-header nav ul {
-    list-style: none;
-    padding-left: 0;
-    display: flex;
-    gap: 1.5em;
-    margin-top: 0.5em;
-}
-
-header nav a {
+.navbar-brand {
     font-family: var(--fonte-cabecalhos);
-    font-weight: 400; /* Montserrat Regular */
-    color: var(--cor-texto);
+    font-weight: 700;
+    color: var(--cor-primaria) !important; /* Cor do brand */
+    font-size: 1.5rem;
 }
 
-header nav a:hover,
-header nav a:focus,
-header nav a.active { /* Para indicar página ativa */
-    color: var(--cor-acento);
-    text-decoration: none;
+.navbar-nav .nav-link {
+    font-family: var(--fonte-cabecalhos);
+    color: var(--cor-navbar-texto) !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-main {
-    padding: 2em;
-    max-width: 960px; /* Layout de coluna única para conteúdo principal */
-    margin: 0 auto; /* Centralizar */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link.active {
+    color: var(--cor-navbar-link-hover) !important;
 }
 
-section {
-    margin-bottom: 3em;
-    padding: 1.5em;
-    background-color: var(--cor-fundo);
-    border-radius: 8px; /* Suavizar cantos */
+.navbar-toggler {
+    border-color: var(--cor-primaria);
 }
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28106, 142, 174, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 
 /* Hero Section específica */
 #hero {
     background-color: var(--cor-fundo-alternativa); /* Fundo suave para destaque */
-    text-align: center;
-    padding: 3em 1.5em;
 }
 
-#hero h2 {
-    color: var(--cor-primaria);
-    font-size: 2.2rem;
+#hero h1.display-4 { /* Já estilizado acima, mas pode ter ajustes específicos */
+    margin-bottom: 0.5em;
 }
 
-#hero p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5em;
-}
-
-.cta-button {
-    display: inline-block;
+/* Botões */
+.btn-primary.cta-button, /* Botão principal da hero section */
+.btn-primary {
     background-color: var(--cor-acento);
-    color: var(--cor-fundo);
-    padding: 0.8em 1.5em;
-    border-radius: 5px;
-    text-decoration: none;
+    border-color: var(--cor-acento);
     font-family: var(--fonte-cabecalhos);
     font-weight: 700;
-    transition: background-color 0.3s ease;
+    padding: 0.6rem 1.2rem; /* Ajuste de padding */
 }
 
-.cta-button:hover,
-.cta-button:focus {
-    background-color: darken(var(--cor-acento), 10%);
+.btn-primary.cta-button:hover,
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--cor-acento) 85%, black);
+    border-color: color-mix(in srgb, var(--cor-acento) 85%, black);
+}
+
+.btn-secondary {
+    background-color: var(--cor-secundaria);
+    border-color: var(--cor-secundaria);
+    color: var(--cor-texto); /* Texto mais escuro para contraste com verde claro */
+    font-family: var(--fonte-cabecalhos);
+    font-weight: 700;
+}
+
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--cor-secundaria) 85%, black);
+    border-color: color-mix(in srgb, var(--cor-secundaria) 85%, black);
+    color: var(--cor-texto);
+}
+
+.btn-outline-primary {
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+    font-family: var(--fonte-cabecalhos);
+    font-weight: 700;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--cor-primaria);
     color: var(--cor-fundo);
-    text-decoration: none;
 }
 
+
+/* Cards para Serviços */
+#introducao-servicos .card {
+    border: 1px solid var(--cor-fundo-alternativa); /* Borda sutil */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra leve para profundidade */
+}
+
+#introducao-servicos .card-title {
+    color: var(--cor-primaria);
+    font-family: var(--fonte-cabecalhos);
+}
+
+/* Seção Sobre Mim Breve */
+#sobre-mim-breve {
+    background-color: var(--cor-fundo-alternativa);
+}
+#sobre-mim-breve img {
+    border: 3px solid var(--cor-secundaria);
+}
+
+/* Footer */
 footer {
-    background-color: var(--cor-texto);
-    color: var(--cor-fundo-alternativa);
-    text-align: center;
-    padding: 2em;
-    margin-top: 2em;
-    font-size: 0.9em;
-}
-
-footer p {
-    margin-bottom: 0.5em;
+    background-color: var(--cor-footer-fundo);
+    color: var(--cor-footer-texto);
 }
 
 footer a {
@@ -200,22 +213,79 @@ footer a:focus {
 }
 
 /* Princípios Neuro-Inclusivos */
-/* 4.1.1 Reduzir Sobrecarga Sensorial: Espaço em branco generoso (já aplicado com padding/margin) */
-/* 4.1.2 Garantir Previsibilidade e Consistência: Layout e navegação consistentes (HTML/CSS) */
-/* 4.1.3 Melhorar Legibilidade:
-    - Texto legível (alinhado à esquerda por padrão, corpo do texto).
-    - Alto Contraste: As cores escolhidas buscam atender WCAG AA (4.5:1).
-      --cor-texto (#333333) em --cor-fundo (#FFFFFF) tem contraste > 7:1.
-      --cor-primaria (#6A8EAE) em --cor-fundo (#FFFFFF) tem contraste > 3:1 para texto grande (cabeçalhos).
-      É importante verificar com ferramentas específicas.
+/* 4.1.1 Reduzir Sobrecarga Sensorial: Espaço em branco generoso (Bootstrap's grid e utilitários de espaçamento ajudam) */
+/* Animações: Bootstrap tem transições sutis por padrão, que geralmente são aceitáveis. Evitar adicionar animações chamativas. */
+
+/* 4.1.2 Garantir Previsibilidade e Consistência:
+    - Navegação Consistente: O Navbar do Bootstrap ajuda nisso.
+    - Estrutura Clara: Uso de classes de container, row, col.
+    - Links e Botões Descritivos: O texto é definido no HTML.
 */
 
-/* Evitar justificação de texto */
-body p, body li {
-    text-align: left;
+/* 4.1.3 Melhorar Legibilidade e Compreensibilidade:
+    - Linguagem Simples: Definido no conteúdo HTML.
+    - Texto Legível:
+        - Alinhamento à esquerda é padrão para body.
+        - Bootstrap containers ajudam a controlar o comprimento da linha.
+    - Alto Contraste:
+        - --cor-texto (#333333) em --cor-fundo (#FFFFFF): Contraste ~12.5:1 (Excelente)
+        - --cor-texto (#333333) em --cor-fundo-alternativa (#F4F4F4): Contraste ~10.7:1 (Excelente)
+        - --cor-primaria (#6A8EAE) (como texto) em --cor-fundo (#FFFFFF): Contraste ~3.5:1. Para texto grande (cabeçalhos H1, H2), é aceitável (WCAG AA para large text). Para texto normal, seria baixo. Como usamos para cabeçalhos grandes, está OK.
+        - --cor-acento (#E57F84) (como texto de link) em --cor-fundo (#FFFFFF): Contraste ~3.0:1. Isso é um pouco baixo para texto normal. Precisamos garantir que os links tenham outros indicadores (como sublinhado no hover/focus) ou considerar escurecer um pouco a cor de acento para texto.
+          - A sobrescrita `--bs-link-color: var(--cor-acento);` é aplicada.
+          - Vamos escurecer um pouco a cor do link para melhorar o contraste:
+*/
+:root {
+    --cor-acento-link: #CC5C60; /* #E57F84 escurecido para melhor contraste com branco */
+    --bs-link-color: var(--cor-acento-link);
+    --bs-link-hover-color: color-mix(in srgb, var(--cor-acento-link) 80%, black);
 }
 
-/* Comprimento de linha (controlado pelo max-width do main) */
-main p, main li {
-    /* max-width: 75ch; /* Idealmente, mas o container já limita */
+.btn-primary.cta-button,
+.btn-primary {
+    background-color: var(--cor-acento-link); /* Usar a cor de link ajustada também para botões principais */
+    border-color: var(--cor-acento-link);
+}
+
+.btn-primary.cta-button:hover,
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--cor-acento-link) 85%, black);
+    border-color: color-mix(in srgb, var(--cor-acento-link) 85%, black);
+}
+
+/* Para o texto dos botões primários, garantir que seja branco para contraste com --cor-acento-link */
+.btn-primary {
+    color: var(--cor-fundo) !important; /* Garante que o texto do botão seja branco */
+}
+
+/* Verificar o contraste do texto do botão secundário */
+.btn-secondary {
+    /* --cor-secundaria (#B2C2A5) em --cor-fundo (#FFFFFF) para o botão em si é ok. */
+    /* --cor-texto (#333333) em --cor-secundaria (#B2C2A5) para o texto do botão: Contraste ~5.5:1 (Bom) */
+}
+
+/* Ajustes finos para espaçamento e alinhamento, se necessário, além do Bootstrap */
+.navbar-brand {
+    margin-right: 2rem; /* Adiciona mais espaço após o brand */
+}
+
+main section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+#hero {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Garantir que o conteúdo não fique muito largo em telas grandes, mantendo a legibilidade */
+.container {
+    max-width: 960px; /* Padrão do AGENTS.md, Bootstrap usa valores maiores para -lg e -xl, mas podemos limitar aqui */
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px; /* Um pouco mais largo para telas xl, se desejado */
+    }
 }
