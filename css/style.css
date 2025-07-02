@@ -1,0 +1,221 @@
+/* Import Google Fonts - Montserrat and Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+/*
+   Seção 4.2: Sistema de Identidade Visual: Paleta Terapêutica e Tipografia
+   - Primária (Confiança e Calma): #6A8EAE (azul médio calmante) ou #A2B9D1 (azul acinzentado claro)
+   - Secundária (Saúde e Crescimento): #B2C2A5 (verde sálvia suave)
+   - Acento (Ação e Atenção): #E57F84 (coral suave)
+   - Cor do Texto: #333333 (cinzento escuro)
+   - Fundo: #FFFFFF (branco) ou #F4F4F4 (cinzento muito claro)
+
+   Fontes:
+   - Cabeçalhos: Montserrat
+   - Corpo do Texto: Roboto
+*/
+
+:root {
+    --cor-primaria: #6A8EAE; /* Azul médio calmante */
+    --cor-secundaria: #B2C2A5; /* Verde sálvia suave */
+    --cor-acento: #E57F84; /* Coral suave */
+    --cor-texto: #333333;
+    --cor-fundo: #FFFFFF;
+    --cor-fundo-alternativa: #F4F4F4;
+
+    --fonte-cabecalhos: 'Montserrat', sans-serif;
+    --fonte-corpo: 'Roboto', sans-serif;
+
+    --base-font-size: 16px; /* Mínimo 16px para corpo */
+    --line-height-corpo: 1.6; /* Espaçamento generoso (ex: 1.5) */
+}
+
+/* Reset básico e Estilos Globais */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-corpo);
+    font-size: var(--base-font-size);
+    line-height: var(--line-height-corpo);
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-cabecalhos);
+    font-weight: 700; /* Montserrat Bold */
+    line-height: 1.3;
+    margin-bottom: 0.75em;
+    color: var(--cor-primaria); /* Cabeçalhos com cor primária para destaque */
+}
+
+h1 {
+    font-size: 2.5rem; /* Exemplo de tamanho */
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--cor-acento);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+    color: darken(var(--cor-acento), 10%);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul, ol {
+    list-style-position: inside;
+    margin-bottom: 1em;
+    padding-left: 1.5em; /* Para melhor visualização dos marcadores */
+}
+
+/* Layout Básico e Componentes */
+header {
+    background-color: var(--cor-fundo-alternativa);
+    padding: 1em 2em;
+    border-bottom: 2px solid var(--cor-primaria);
+}
+
+header h1 a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+}
+
+header nav ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    gap: 1.5em;
+    margin-top: 0.5em;
+}
+
+header nav a {
+    font-family: var(--fonte-cabecalhos);
+    font-weight: 400; /* Montserrat Regular */
+    color: var(--cor-texto);
+}
+
+header nav a:hover,
+header nav a:focus,
+header nav a.active { /* Para indicar página ativa */
+    color: var(--cor-acento);
+    text-decoration: none;
+}
+
+main {
+    padding: 2em;
+    max-width: 960px; /* Layout de coluna única para conteúdo principal */
+    margin: 0 auto; /* Centralizar */
+}
+
+section {
+    margin-bottom: 3em;
+    padding: 1.5em;
+    background-color: var(--cor-fundo);
+    border-radius: 8px; /* Suavizar cantos */
+}
+
+/* Hero Section específica */
+#hero {
+    background-color: var(--cor-fundo-alternativa); /* Fundo suave para destaque */
+    text-align: center;
+    padding: 3em 1.5em;
+}
+
+#hero h2 {
+    color: var(--cor-primaria);
+    font-size: 2.2rem;
+}
+
+#hero p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5em;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--cor-acento);
+    color: var(--cor-fundo);
+    padding: 0.8em 1.5em;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: var(--fonte-cabecalhos);
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover,
+.cta-button:focus {
+    background-color: darken(var(--cor-acento), 10%);
+    color: var(--cor-fundo);
+    text-decoration: none;
+}
+
+footer {
+    background-color: var(--cor-texto);
+    color: var(--cor-fundo-alternativa);
+    text-align: center;
+    padding: 2em;
+    margin-top: 2em;
+    font-size: 0.9em;
+}
+
+footer p {
+    margin-bottom: 0.5em;
+}
+
+footer a {
+    color: var(--cor-secundaria); /* Links no footer com cor secundária */
+}
+
+footer a:hover,
+footer a:focus {
+    color: var(--cor-fundo);
+}
+
+/* Princípios Neuro-Inclusivos */
+/* 4.1.1 Reduzir Sobrecarga Sensorial: Espaço em branco generoso (já aplicado com padding/margin) */
+/* 4.1.2 Garantir Previsibilidade e Consistência: Layout e navegação consistentes (HTML/CSS) */
+/* 4.1.3 Melhorar Legibilidade:
+    - Texto legível (alinhado à esquerda por padrão, corpo do texto).
+    - Alto Contraste: As cores escolhidas buscam atender WCAG AA (4.5:1).
+      --cor-texto (#333333) em --cor-fundo (#FFFFFF) tem contraste > 7:1.
+      --cor-primaria (#6A8EAE) em --cor-fundo (#FFFFFF) tem contraste > 3:1 para texto grande (cabeçalhos).
+      É importante verificar com ferramentas específicas.
+*/
+
+/* Evitar justificação de texto */
+body p, body li {
+    text-align: left;
+}
+
+/* Comprimento de linha (controlado pelo max-width do main) */
+main p, main li {
+    /* max-width: 75ch; /* Idealmente, mas o container já limita */
+}
